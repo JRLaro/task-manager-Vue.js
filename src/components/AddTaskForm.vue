@@ -23,37 +23,41 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "AddTaskForm",
   data() {
     return {
+      img: "",
       text: "",
       day: "",
+      // createdBy: "",
       reminder: false,
     };
   },
   methods: {
-    onSubmit(e) {
+    async onSubmit(e) {
       e.preventDefault();
-      console.log(`Form submitted`);
 
       if (!this.text) {
         alert("Please add a Task");
         return;
       }
-      // const res = axios.get('https://randomuser.me/api/?results=5000').then
+
+      const res = await axios.get("https://randomuser.me/api/");
+      const thisImg = res.data.results[0].picture.thumbnail;
 
       const newTask = {
-        // id: Math.floor(Math.random() * 10000),
+        img: thisImg,
         text: this.text,
         day: this.day,
+        // createBy: createdBy,
         reminder: this.reminder,
       };
 
       this.$emit("add-task", newTask);
-
+      this.img = "";
       this.text = "";
       this.day = "";
       this.reminder = false;
