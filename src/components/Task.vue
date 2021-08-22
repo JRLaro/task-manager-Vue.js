@@ -4,8 +4,10 @@
     :class="[task.reminder ? 'reminder' : '', 'task']"
   >
     <span
-      ><img src="https://randomuser.me/api/portraits/thumb/men/75.jpg"
-    /></span>
+      >
+      <!-- <img src="https://randomuser.me/api/portraits/thumb/men/75.jpg" alt="random picture"> -->
+      <img :src="task.img" >
+</span>
     <h3>
       {{ task.text }}
       <i @click="$emit('delete-task', task.id)" class="fas fa-times"></i>
@@ -15,11 +17,25 @@
 </template>
 
 <script>
+
+
 export default {
   name: "Task",
   props: {
     task: Object,
   },
+  methods: {
+    thisImg() {
+      console.log('====================================')
+      console.log(this.task.img);
+      console.log('====================================')
+    }
+  },
+  watch:{
+    task(val){
+      console.log(val.img)
+    }
+  }
 };
 </script>
 

@@ -23,41 +23,61 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "AddTaskForm",
   data() {
     return {
+      img: "",
       text: "",
       day: "",
       reminder: false,
     };
   },
   methods: {
-    onSubmit(e) {
+    async onSubmit(e) {
       e.preventDefault();
-      console.log(`Form submitted`);
+      // console.log(`Form submitted`);
 
       if (!this.text) {
         alert("Please add a Task");
         return;
       }
-      // const res = axios.get('https://randomuser.me/api/?results=5000').then
+
+      const res = await axios.get("https://randomuser.me/api/");
+      const thisImg = res.data.results[0].picture.thumbnail;
 
       const newTask = {
-        // id: Math.floor(Math.random() * 10000),
+        // img: thisImg,
+        img: thisImg,
         text: this.text,
         day: this.day,
         reminder: this.reminder,
       };
+      // console.log('///------------->')
+      //   console.log(thisImg)
+      // console.log('///------------->')
 
       this.$emit("add-task", newTask);
-
+      this.img = "";
       this.text = "";
       this.day = "";
       this.reminder = false;
+
+      // return console.log(this.img);
     },
+    // async getImg() {
+    //   const res = await axios.get("https://randomuser.me/api/");
+    //   const thisImg = res.data.results[0].picture.thumbnail;
+    //   this.img = thisImg;
+
+    //   // return thisImg;
+    //   return this.img;
+    // },
+  },
+  randoNum() {
+    Math.floor(Math.random() * 10000);
   },
 };
 </script>

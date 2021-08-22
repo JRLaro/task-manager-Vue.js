@@ -79,9 +79,7 @@ export default {
     async fetchTasks() {
       try {
         const res = await axios.get("api/tasks");
-
-        this.tasks = [...res.data, this.tasks]
-        return this.tasks;
+        return res.data;
       } catch (err) {
         console.error(err.res.data);
       }
