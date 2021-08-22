@@ -4,6 +4,7 @@
     <Task
       @toggle-reminder="$emit('toggle-reminder', task.id)"
       @delete-task="$emit('delete-task', task.id)"
+      @update-task="$emit('update-task', task.id)"
       :task="task"
     />
   </div>

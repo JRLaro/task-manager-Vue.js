@@ -32,13 +32,13 @@ export default {
       img: "",
       text: "",
       day: "",
+      // createdBy: "",
       reminder: false,
     };
   },
   methods: {
     async onSubmit(e) {
       e.preventDefault();
-      // console.log(`Form submitted`);
 
       if (!this.text) {
         alert("Please add a Task");
@@ -49,35 +49,19 @@ export default {
       const thisImg = res.data.results[0].picture.thumbnail;
 
       const newTask = {
-        // img: thisImg,
         img: thisImg,
         text: this.text,
         day: this.day,
+        // createBy: createdBy,
         reminder: this.reminder,
       };
-      // console.log('///------------->')
-      //   console.log(thisImg)
-      // console.log('///------------->')
 
       this.$emit("add-task", newTask);
       this.img = "";
       this.text = "";
       this.day = "";
       this.reminder = false;
-
-      // return console.log(this.img);
     },
-    // async getImg() {
-    //   const res = await axios.get("https://randomuser.me/api/");
-    //   const thisImg = res.data.results[0].picture.thumbnail;
-    //   this.img = thisImg;
-
-    //   // return thisImg;
-    //   return this.img;
-    // },
-  },
-  randoNum() {
-    Math.floor(Math.random() * 10000);
   },
 };
 </script>
